@@ -8,7 +8,6 @@ Source0:	http://www.andreasen.org/LeakTracer/LeakTracer.tar.gz
 # Source0-md5:	e1cf9d03c12a45d39f253e558d231438
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andreasen.org/LeakTracer/
-BuildRequires:	libstdc++-devel
 BuildRequires:	sed >= 4.0
 Requires:	gdb
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -34,7 +33,7 @@ sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
 
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcflags}"
+	CXXFLAGS="%{rpmcflags} -nodefaultlibs"
 
 %install
 rm -rf $RPM_BUILD_ROOT
