@@ -1,0 +1,37 @@
+--- LeakTracer/Makefile.orig	2003-11-18 14:42:21.000000000 +0100
++++ LeakTracer/Makefile	2005-12-10 17:01:40.475210000 +0100
+@@ -1,4 +1,4 @@
+-CC = g++
++CXX := g++
+ 
+ # Source files
+ SRC := LeakTracer.cc
+@@ -7,7 +7,7 @@
+ THREAD=-DTHREAD_SAVE -D_REENTRANT -D_THREAD_SAFE -pthread 
+ 
+ # Common flags
+-C_FLAGS = -g -pipe -Wall -W $(THREAD)
++C_FLAGS = -Wall -W $(THREAD) $(CXXFLAGS)
+ O_FLAGS = $(C_FLAGS)
+ 
+ # Object files
+@@ -32,16 +32,16 @@
+ 	(cd .. && tar cvfz  /u/erwin/drylock/LeakTracer/LeakTracer.tar.gz -X LeakTracer/.tarexcl  LeakTracer/)
+ 
+ $(OBJ_DIR)/%.o: %.cc
+-	$(CC) -fPIC -c $(C_FLAGS) $< -o $@
++	$(CXX) -fPIC -c $(C_FLAGS) $< -o $@
+ 
+ $(OBJ_DIR)/%.so : $(OBJ_DIR)/%.o
+-	$(CC) $(O_FLAGS) -shared -o $@ $<
++	$(CXX) $(O_FLAGS) -shared -o $@ $<
+ 
+ README.html: README
+ 	/u/erwin/ed/mcl/util/htmlize.pl README
+ 
+ test:
+-	$(CC) $(C_FLAGS) test.cc -o test
++	$(CXX) $(C_FLAGS) test.cc -o test
+ 	./test
+ 	./LeakCheck ./test
+ 	./leak-analyze ./test
