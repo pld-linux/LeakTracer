@@ -1,0 +1,54 @@
+This patch fixes build on 64-bit platforms.
+
+LeakTracer.cc: In member function 'void LeakTracer::initialize()':
+LeakTracer.cc:195: warning: format '%d' expects type 'int', but argument 3 has type 'long unsigned int'
+LeakTracer.cc: In member function 'void* LeakTracer::registerAlloc(size_t, bool)':
+LeakTracer.cc:288: warning: format '%d' expects type 'int', but argument 3 has type 'size_t'
+LeakTracer.cc: In member function 'void LeakTracer::registerFree(void*, bool)':
+LeakTracer.cc:416: warning: format '%d' expects type 'int', but argument 7 has type 'size_t'
+LeakTracer.cc:427: warning: format '%d' expects type 'int', but argument 5 has type 'size_t'
+LeakTracer.cc:429: warning: format '%d' expects type 'int', but argument 3 has type 'long unsigned int'
+
+--- LeakTracer.cc.orig	2005-12-10 23:13:59.287782624 +0000
++++ LeakTracer.cc	2005-12-10 23:17:14.286138368 +0000
+@@ -192,7 +192,7 @@
+ 		memset ((void*) leakHash, 0x00, SOME_PRIME * sizeof(int));
+ 
+ #ifdef MAGIC
+-		fprintf (report, "# memory overrun protection of %d Bytes\n", MAGIC_SIZE);
++		fprintf (report, "# memory overrun protection of %zd Bytes\n", MAGIC_SIZE);
+ #endif
+ 		
+ #ifdef SAVEVALUE
+@@ -285,7 +285,7 @@
+ 	//	fprintf(stderr, "LeakTracer::registerAlloc()\n");
+ 
+ 	if (destroyed) {
+-		fprintf(stderr, "Oops, registerAlloc called after destruction of LeakTracer (size=%d)\n", size);
++		fprintf(stderr, "Oops, registerAlloc called after destruction of LeakTracer (size=%zd)\n", size);
+ 		return LT_MALLOC(size);
+ 	}
+ 
+@@ -408,7 +408,7 @@
+ 		if (leaks[i].type != type) {
+ 			fprintf(report, 
+ 				"S %10p %10p  # new%s but delete%s "
+-				"; size %d\n",
++				"; size %zd\n",
+ 				leaks[i].allocAddr,
+ 				__builtin_return_address(1),
+ 				((!type) ? "[]" : " normal"),
+@@ -421,11 +421,11 @@
+ 		if (memcmp((char*)p + leaks[i].size, MAGIC, MAGIC_SIZE)) {
+ 			fprintf(report, "O %10p %10p  "
+ 				"# memory overwritten beyond allocated"
+-				" %d bytes\n",
++				" %zd bytes\n",
+ 				leaks[i].allocAddr,
+ 				__builtin_return_address(1),
+ 				leaks[i].size);
+-			fprintf(report, "# %d byte beyond area:\n",
++			fprintf(report, "# %zd byte beyond area:\n",
+ 				MAGIC_SIZE);
+ 			hexdump((unsigned char*)p+leaks[i].size,
+ 				MAGIC_SIZE);
