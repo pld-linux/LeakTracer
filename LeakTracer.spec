@@ -33,7 +33,7 @@ sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
 
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcflags} -nodefaultlibs"
+	CXXFLAGS="%{rpmcxxflags} -nodefaultlibs"
 
 %install
 rm -rf $RPM_BUILD_ROOT
