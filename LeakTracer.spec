@@ -10,6 +10,7 @@ Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-64bit.patch
 Patch2:		%{name}-caller_addr.patch
 URL:		http://www.andreasen.org/LeakTracer/
+BuildRequires:	libstdc++-devel
 BuildRequires:	sed >= 4.0
 Requires:	gdb
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
