@@ -1,6 +1,6 @@
 Summary:	A tool for trace and analyze memory leaks in C++ programs
 Name:		LeakTracer
-Version:	2.3
+Version:	2.4
 Release:	1
 License:	Public Domain
 Group:		Applications
@@ -37,7 +37,7 @@ sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
 
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} -nodefaultlibs"
+	CXXFLAGS="%{rpmcxxflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
