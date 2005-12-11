@@ -10,7 +10,6 @@ Patch0:		%{name}-Makefile.patch
 Patch1:		%{name}-64bit.patch
 Patch2:		%{name}-caller_addr.patch
 URL:		http://www.andreasen.org/LeakTracer/
-BuildRequires:	libstdc++-devel
 BuildRequires:	sed >= 4.0
 Requires:	gdb
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,7 +37,7 @@ sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
 
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags}"
+	CXXFLAGS="%{rpmcxxflags} -nodefaultlibs -O1 -fno-omit-frame-pointer"
 
 %install
 rm -rf $RPM_BUILD_ROOT
