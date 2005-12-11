@@ -1,0 +1,42 @@
+--- LeakTracer.cc.orig	2005-12-10 23:57:27.000000000 +0000
++++ LeakTracer.cc	2005-12-11 00:12:19.592655400 +0000
+@@ -86,6 +86,21 @@
+  */
+ #define INITIALSIZE 32768
+ 
++static inline
++const void* caller_address(const void* return_address)
++{
++	unsigned long c = (unsigned long)return_address;
++#if defined(__i386__) || defined(__x86_64__)
++// x86-32: call [mem] takes 5 bytes.
++// x86-64: callq/jmpq [mem] takes 5 bytes.
++	c -= 5;
++#elif defined(__powerpc__)
++// ppc32: bl [mem] takes 4 bytes.
++	c -= 4;
++#endif
++	return (const void*)c;
++}
++
+ static class LeakTracer {
+ 	struct Leak {
+ 		const void *addr;
+@@ -326,7 +341,7 @@
+ 				leaks[i].addr = p;
+ 				leaks[i].size = size;
+ 				leaks[i].type = type;
+-				leaks[i].allocAddr=__builtin_return_address(1);
++				leaks[i].allocAddr = caller_address(__builtin_return_address(1));
+ 				firstFreeSpot = i+1;
+ 				// allow to lookup our index fast.
+ 				int *hashPos = &leakHash[ ADDR_HASH(p) ];
+@@ -410,7 +425,7 @@
+ 				"S %10p %10p  # new%s but delete%s "
+ 				"; size %zd\n",
+ 				leaks[i].allocAddr,
+-				__builtin_return_address(1),
++				caller_address(__builtin_return_address(1)),
+ 				((!type) ? "[]" : " normal"),
+ 				((type) ? "[]" : " normal"),
+ 				leaks[i].size);
