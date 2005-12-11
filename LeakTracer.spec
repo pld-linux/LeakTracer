@@ -7,6 +7,8 @@ Group:		Applications
 Source0:	http://www.andreasen.org/LeakTracer/LeakTracer.tar.gz
 # Source0-md5:	e1cf9d03c12a45d39f253e558d231438
 Patch0:		%{name}-Makefile.patch
+Patch1:		%{name}-64bit.patch
+Patch2:		%{name}-caller_addr.patch
 URL:		http://www.andreasen.org/LeakTracer/
 BuildRequires:	sed >= 4.0
 Requires:	gdb
@@ -27,6 +29,8 @@ look at malloc/free/realloc.
 %prep
 %setup -q -n %{name}
 %patch0 -p1
+%patch1 -p0
+%patch2 -p0
 
 %build
 sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
