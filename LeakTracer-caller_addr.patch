@@ -17,8 +17,8 @@
 +// alpha: bsr ra,[mem] takes 4 bytes.
 +	c -= 4;
 +#elif defined(__sparc__)
-+// sparc32/64: call with delay slot takes 8 bytes.
-+	c -= 8;
++// sparc32/64: call with delay slot takes 8 bytes
++// but %i7 (r31) contains return_address-8, so no change here.
 +#endif
 +	return (const void*)c;
 +}
