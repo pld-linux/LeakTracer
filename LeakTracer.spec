@@ -14,6 +14,7 @@ URL:		http://www.andreasen.org/LeakTracer/
 BuildRequires:	gcc-c++
 BuildRequires:	sed >= 4.0
 Requires:	gdb
+ExcludeArch:	alpha arm mips
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
