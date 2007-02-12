@@ -1,5 +1,5 @@
 Summary:	A tool for trace and analyze memory leaks in C++ programs
-Summary(pl.UTF-8):   Narzędzie do śledzenia i analizowania wycieków pamięci w programach w C++
+Summary(pl.UTF-8):	Narzędzie do śledzenia i analizowania wycieków pamięci w programach w C++
 Name:		LeakTracer
 Version:	2.4
 Release:	1
