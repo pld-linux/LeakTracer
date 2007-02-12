@@ -1,5 +1,5 @@
 Summary:	A tool for trace and analyze memory leaks in C++ programs
-Summary(pl):	Narzêdzie do ¶ledzenia i analizowania wycieków pamiêci w programach w C++
+Summary(pl.UTF-8):   NarzÄ™dzie do Å›ledzenia i analizowania wyciekÃ³w pamiÄ™ci w programach w C++
 Name:		LeakTracer
 Version:	2.4
 Release:	1
@@ -29,17 +29,17 @@ operator delete - this will give problems if you override them as
 well. LeakTracer traces only new/new[] and delete calls - it does not
 look at malloc/free/realloc.
 
-%description -l pl
-LeakTracer to ma³e narzêdzie do sprawdzania programów w C++ pod k±tem
-wycieków pamiêci. Aby go u¿yæ na jakim¶ programie, trzeba uruchomiæ
-ten program przy u¿yciu za³±czonego skryptu LeakCheck. U¿ywa on
-LD_PRELOAD do przykrycia niektórych funkcji (rekompilacja nie jest
-potrzebna). leak-analyze u¿ywa gdb do pokazania w których dok³adnie
-liniach pamiêæ zosta³a przydzielona i nie zwolniona - co oznacza, ¿e
-trzeba zwolniæ wszystkie dynamicznie przydzielone dane. LeakTracer
-przykrywa tak¿e globalne operatory new i delete - mo¿e to spowodowaæ
-problemy, je¶li my tak¿e chcemy je przykryæ. LeakTracer ¶ledzi tylko
-wywo³ania new/new[] i delete - nie patrzy na malloc/free/realloc.
+%description -l pl.UTF-8
+LeakTracer to maÅ‚e narzÄ™dzie do sprawdzania programÃ³w w C++ pod kÄ…tem
+wyciekÃ³w pamiÄ™ci. Aby go uÅ¼yÄ‡ na jakimÅ› programie, trzeba uruchomiÄ‡
+ten program przy uÅ¼yciu zaÅ‚Ä…czonego skryptu LeakCheck. UÅ¼ywa on
+LD_PRELOAD do przykrycia niektÃ³rych funkcji (rekompilacja nie jest
+potrzebna). leak-analyze uÅ¼ywa gdb do pokazania w ktÃ³rych dokÅ‚adnie
+liniach pamiÄ™Ä‡ zostaÅ‚a przydzielona i nie zwolniona - co oznacza, Å¼e
+trzeba zwolniÄ‡ wszystkie dynamicznie przydzielone dane. LeakTracer
+przykrywa takÅ¼e globalne operatory new i delete - moÅ¼e to spowodowaÄ‡
+problemy, jeÅ›li my takÅ¼e chcemy je przykryÄ‡. LeakTracer Å›ledzi tylko
+wywoÅ‚ania new/new[] i delete - nie patrzy na malloc/free/realloc.
 
 %prep
 %setup -q -n %{name}
