@@ -43,9 +43,9 @@ wywołania new/new[] i delete - nie patrzy na malloc/free/realloc.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
-%patch1 -p0
-%patch2 -p0
+%patch -P0 -p1
+%patch -P1 -p0
+%patch -P2 -p0
 
 %build
 sed -i "s:SHLIB=.*:SHLIB=%{_libdir}/LeakTracer.so:" LeakCheck
